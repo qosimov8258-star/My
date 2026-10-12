@@ -1,0 +1,89 @@
+@font-face {
+  font-family: 'CyronMontserrat';
+  src: url('/cyron/montserrat-latin.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: block;
+}
+
+.root {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--cyron-bg, #fff);
+  --cyron-ink: #303b47;
+}
+
+.aurora {
+  position: absolute; inset: 0; z-index: 0;
+  overflow: hidden; pointer-events: none;
+  filter: blur(64px);
+}
+.auroraBlob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.5;
+  will-change: transform;
+}
+.auroraBlob:nth-child(1) {
+  width: 44vw; height: 44vw; max-width: 560px; max-height: 560px;
+  top: -12%; left: -10%;
+  background: radial-gradient(circle, #a78bfa, transparent 70%);
+  animation: auroraDrift1 28s ease-in-out infinite alternate;
+}
+.auroraBlob:nth-child(2) {
+  width: 36vw; height: 36vw; max-width: 460px; max-height: 460px;
+  bottom: -14%; right: -8%;
+  background: radial-gradient(circle, #6d28d9, transparent 70%);
+  animation: auroraDrift2 34s ease-in-out infinite alternate;
+}
+.auroraBlob:nth-child(3) {
+  width: 30vw; height: 30vw; max-width: 380px; max-height: 380px;
+  top: 28%; right: 18%;
+  background: radial-gradient(circle, #c4b5fd, transparent 70%);
+  animation: auroraDrift3 24s ease-in-out infinite alternate;
+}
+@keyframes auroraDrift1 { from { transform: translate(0, 0) scale(1); } to { transform: translate(5%, 7%) scale(1.1); } }
+@keyframes auroraDrift2 { from { transform: translate(0, 0) scale(1); } to { transform: translate(-7%, -5%) scale(1.08); } }
+@keyframes auroraDrift3 { from { transform: translate(0, 0) scale(1); } to { transform: translate(-6%, 8%) scale(1.14); } }
+@media (prefers-reduced-motion: reduce) {
+  .auroraBlob { animation: none; }
+}
+
+.logo {
+  position: absolute; left: 50%; top: 50%;
+  width: var(--sc, 300px); height: var(--sc, 300px);
+  transform: translate(-50%, calc(-50% + var(--lift, 0px)));
+  pointer-events: none; z-index: 2;
+  filter: drop-shadow(0 18px 20px rgba(110, 70, 205, 0.11));
+}
+.canvas { width: 100%; height: 100%; display: block; }
+.wind { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.wind path { fill: none; stroke: #c7b3f2; stroke-width: 0.5; stroke-linecap: round; opacity: 0; }
+
+.wordmark {
+  position: absolute; z-index: 1;
+  left: 50%; top: var(--wm-top, 60%);
+  width: var(--wm-w, 430px);
+  transform: translateX(-50%);
+  perspective: 1100px; perspective-origin: 50% 0;
+  font-family: 'CyronMontserrat', 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--cyron-ink);
+  text-align: center;
+  pointer-events: none;
+}
+.line {
+  display: block; width: max-content; margin-inline: auto; white-space: nowrap;
+  transform-origin: 50% 0;
+  opacity: 0; clip-path: inset(0 0 100% 0);
+  will-change: transform, opacity, clip-path;
+}
+.l1 { font-weight: 800; line-height: 1; }
+.te { font-weight: 300; }
+.l2 { font-weight: 400; line-height: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .line { opacity: 1; clip-path: none; }
+}
