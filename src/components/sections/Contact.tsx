@@ -1,7 +1,8 @@
-import { Mail } from "lucide-react";
+import { Mail, Phone, Send } from "lucide-react";
 import type { SVGProps } from "react";
-
-const CONTACT_EMAIL = "hello@cyrontech.dev";
+import ContactForm from "@/components/ContactForm";
+import Reveal from "@/components/Reveal";
+import { SITE } from "@/lib/site";
 
 function GithubIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -20,53 +21,82 @@ function LinkedinIcon(props: SVGProps<SVGSVGElement>) {
 }
 
 const SOCIALS = [
-  { label: "GitHub", href: "https://github.com", icon: GithubIcon },
-  { label: "LinkedIn", href: "https://linkedin.com", icon: LinkedinIcon },
+  { label: "GitHub", href: SITE.github, icon: GithubIcon },
+  { label: "LinkedIn", href: SITE.linkedin, icon: LinkedinIcon },
 ];
 
 export default function Contact() {
   return (
-    <section
-      id="contact"
-      className="scroll-mt-28 bg-[#2a1250] px-4 py-24 text-white"
-    >
-      <div className="mx-auto max-w-3xl text-center">
-        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-violet-400">
-          Contact
-        </span>
-        <h2 className="mt-4 text-3xl font-bold sm:text-4xl">
-          Let&apos;s build something together
-        </h2>
-        <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-white/60">
-          Have a project in mind, or just want to talk tech? My inbox is
-          open.
-        </p>
+    <section id="contact" className="scroll-mt-28 px-4 pb-24 pt-8 sm:pb-32">
+      <Reveal>
+        <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[40px] bg-[#2a1250] px-6 py-16 text-white sm:px-12 sm:py-24">
+          <div className="animate-blob pointer-events-none absolute -left-20 -top-20 h-80 w-80 rounded-full bg-violet-600/50 blur-3xl" />
+          <div className="animate-blob pointer-events-none absolute -bottom-24 -right-16 h-80 w-80 rounded-full bg-fuchsia-500/40 blur-3xl [animation-delay:-7s]" />
 
-        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a
-            href={`mailto:${CONTACT_EMAIL}`}
-            className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-opacity hover:opacity-90"
-          >
-            <Mail className="h-4 w-4" />
-            {CONTACT_EMAIL}
-          </a>
+          <div className="relative grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+            <div>
+              <span className="glass-dark inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs text-white/80">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inset-0 rounded-full bg-emerald-400 [animation:pulseRing_2s_ease-out_infinite]" />
+                  <span className="relative h-2 w-2 rounded-full bg-emerald-400" />
+                </span>
+                Available for new projects
+              </span>
+              <h2 className="mt-6 text-4xl font-bold tracking-tight sm:text-6xl">
+                Let&apos;s build something together
+              </h2>
+              <p className="mt-5 max-w-md text-lg leading-relaxed text-white/60">
+                Tell me about your idea. I reply {SITE.responseTime} with
+                questions, a rough plan and a transparent estimate.
+              </p>
 
-          <div className="flex items-center gap-3">
-            {SOCIALS.map(({ label, href, icon: Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={label}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-white/30 hover:text-white"
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href={`mailto:${SITE.email}`}
+                  className="press inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-white/20"
+                >
+                  <Mail className="h-4 w-4" />
+                  {SITE.email}
+                </a>
+                <a
+                  href={`tel:${SITE.phone}`}
+                  className="press inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-white/20"
+                >
+                  <Phone className="h-4 w-4" />
+                  {SITE.phone}
+                </a>
+                <a
+                  href={`https://t.me/${SITE.telegram}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="press inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-white/20"
+                >
+                  <Send className="h-4 w-4" />@{SITE.telegram}
+                </a>
+              </div>
+
+              <div className="mt-6 flex items-center gap-3">
+                {SOCIALS.map(({ label, href, icon: Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={label}
+                    className="press glass-dark flex h-12 w-12 items-center justify-center rounded-full text-white/80 transition-colors hover:text-white"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="glass-dark rounded-[32px] p-6 sm:p-8">
+              <ContactForm />
+            </div>
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

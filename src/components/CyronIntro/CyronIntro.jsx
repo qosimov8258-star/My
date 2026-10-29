@@ -16,7 +16,9 @@ import styles from './CyronIntro.module.css';
 export default function CyronIntro({ assetBase = '/cyron', scale = 1, onDone, freeze = null, className = '', style }) {
   const rootRef = useRef(null);
   const doneRef = useRef(onDone);
-  doneRef.current = onDone;
+  useEffect(() => {
+    doneRef.current = onDone;
+  }, [onDone]);
 
   useEffect(() => {
     let handle = null;
